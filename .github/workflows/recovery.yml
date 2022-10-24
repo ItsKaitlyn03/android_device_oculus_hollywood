@@ -1,5 +1,10 @@
-name: android-recovery-action
-uses: XenonTheInertG/android-recovery-action@v2.1.2
+name: recovery
+on:
+  workflow_dispatch:
+defaults:
+  run:
+    shell: bash
+
 env:
   MANIFEST: "https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-10.0-deprecated"
   DT_LINK: "https://github.com/ItsKaitlyn03/android_device_oculus_hollywood.git"
@@ -11,5 +16,10 @@ env:
   EXTRA_CMD: ""
   TZ: "America/New_York"
 
-on:
-  # ...
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: rokibhasansagar/slimhub_actions@main
+    - name: Build Recovery
+      uses: XenonTheInertG/android-recovery-action@main
